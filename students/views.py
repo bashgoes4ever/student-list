@@ -2,11 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from .serializers import *
-from braces.views import CsrfExemptMixin
 
 
-class StudentView(CsrfExemptMixin, APIView):
-    permission_classes = []
+class StudentView(APIView):
+    permission_classes = [permissions.AllowAny]
 
     def get(self, request):
         if request.GET.get('id'):
@@ -43,8 +42,8 @@ class StudentView(CsrfExemptMixin, APIView):
         return Response({'status': 201})
 
 
-class MarksView(CsrfExemptMixin, APIView):
-    permission_classes = []
+class MarksView(APIView):
+    permission_classes = [permissions.AllowAny]
 
     def get(self, request):
         marks = Mark.objects.all()
